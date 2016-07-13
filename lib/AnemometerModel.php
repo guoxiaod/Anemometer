@@ -281,6 +281,7 @@ class AnemometerModel {
         if ($this->mysqli->connect_errno) {
             throw new Exception($this->mysqli->connect_error);
         }
+        $this->mysqli->set_charset("utf8");
     }
 
     /**

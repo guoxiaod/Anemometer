@@ -1,6 +1,6 @@
 -- Create the database needed for the Box Anemometer
-DROP DATABASE IF EXISTS slow_query_log;
-CREATE DATABASE slow_query_log;
+-- DROP DATABASE IF EXISTS slow_query_log;
+CREATE DATABASE IF NOT EXISTS slow_query_log;
 USE slow_query_log;
 
 -- Create the global query review table
@@ -13,7 +13,7 @@ CREATE TABLE `global_query_review` (
   `reviewed_by` varchar(20) DEFAULT NULL,
   `reviewed_on` datetime DEFAULT NULL,
   `comments` text,
-  `reviewed_status` varchar(24) DEFAULT NULL,
+  `reviewed_status` varchar(24) DEFAULT 'ticket-created',
   PRIMARY KEY (`checksum`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
@@ -21,6 +21,8 @@ CREATE TABLE `global_query_review` (
 CREATE TABLE `global_query_review_history` (
   `hostname_max` varchar(64) NOT NULL,
   `db_max` varchar(64) DEFAULT NULL,
+  `host_max` varchar(64) DEFAULT NULL,
+  `user_max` varchar(64) DEFAULT NULL,
   `checksum` bigint(20) unsigned NOT NULL,
   `sample` longtext NOT NULL,
   `ts_min` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',

@@ -84,8 +84,11 @@ class QueryRewrite{
                 $select = preg_replace('/^DELETE\s+'.self::TABLEREF.'\s+FROM\s/i', 'SELECT 0 FROM ', $this->sql);
                 break;
             case self::UPDATE:
+                /*
                 preg_match('/^UPDATE\s+(.*)\s+SET\s+(.*)\s+WHERE\s+(.*)$/i', $this->sql, $subpatterns);
                 $select = "SELECT {$subpatterns[2]} FROM {$subpatterns[1]} WHERE {$subpatterns[3]}";
+                */
+                $select = $this->sql;
                 break;
             case self::INSERTSELECT:
                 if (preg_match('/\(\s*(SELECT\s+.*)\)/', $this->sql, $subpatterns))

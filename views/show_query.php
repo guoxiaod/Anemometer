@@ -241,6 +241,8 @@ $(document).ready( function ()  {
 				<tr>
 					<td>
 						<strong>Last Sample</strong> on host <strong><?php echo $sample[$hostname_field_name]; ?></strong> at <strong><?php echo $sample[$time_field_name]; ?></strong>
+                        <strong> (User: <?= $sample['user_max'],'@',$sample['host_max'];?>) </strong>
+                        <strong> (DB: <?= $sample['db_max'],'@',$sample['hostname_max'];?>) </strong>
 					</td>
 					<td>
 						<!-- dropdown button for more samples with counts -->

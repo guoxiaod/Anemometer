@@ -184,6 +184,7 @@ class QueryExplain {
             $this->mysqli->real_connect(
                     $this->conf['host'], $this->conf['user'], $this->conf['password'], $this->conf['db'], $this->conf['port']
             );
+            $this->mysqli->set_charset("utf8");
         } catch (Exception $e) {
             throw new Exception(
                     sprintf("Timeout connecting to mysql on %s:%s", $this->conf['host'], $this->conf['port'])
@@ -210,7 +211,12 @@ class QueryExplain {
             return null;
         }
 
-        return $this->mysqli->query($explain);
+        $result = $this->mysqli->query($explain);
+        if($this->mysqli->errno) {
+            $this->mysqli->query("set sql_mode = ansi_quotes");
+            $result = $this->mysqli->query($explain);
+        }
+        return $result;
     }
 
     /**
