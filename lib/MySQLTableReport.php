@@ -472,7 +472,7 @@ class MySQLTableReport {
      * @param string $expression    The raw WHERE expression
      */
     public function raw_where($key, $field, $expression) {
-        $this->extra_where = $expression;
+        $this->extra_where = html_entity_decode($expression, ENT_QUOTES);
     }
 
     /**
@@ -935,7 +935,6 @@ class MySQLTableReport {
                             )
                     ) . "\n";
         }
-
 
         // EXTRA TEXT INPUT FOR WHERE
         if (isset($this->extra_where) and $this->extra_where != '') {
